@@ -11,34 +11,15 @@ You cannot move through walls. You cannot wrap around the edges of the board
 """
 
 def shortestPath(board, start, end):
-    if start == end:
-        return 0
+    board_copy = board.copy()
+    rows = len(board)
+    cols = len(board[0])
+    for i in range()
     
-    rows = len(board)-1
-    cols = len(board[0])-1
     
-    paths = [[0, start] * 4]
-    steps = [[0, 1], [1, 0], [0, -1], [-1, 0]]
-    while len(paths) != 0:
-        #print("here")
-        p = paths[0]
-        paths.pop(0)
-        if p not in paths:
-            print("removed")
-        for step in steps:
-            #print("stepping")
-            p[-1][0] += step[0]
-            p[-1][1] += step[1]
-            if p[-1][0] >= 0 and p[-1][0] <=rows and p[-1][1] >= 0 and p[-1][1]<=cols:
-                #print(p[-1][0], ' ', p[-1][1])
-                if board[p[-1][0]][p[-1][1]] == 'f':
-                    p[0] += 1
-                    paths.append(p)
-                else:
-                    continue
-            if p[-1] == end:
-                return p[0]
-    return None
+    
+    
+    
             
 if __name__ == "__main__":
     board = [['f', 'f', 'f', 'f'],
