@@ -13,25 +13,49 @@ Each method should run in constant time.
 """
 
 class Stack:
-    
-    def __init__:
-        self.data = []
+    def __init__(self):
+        self.stack = []
+        self.max_stack = []
+        self.length = 0
 
     def push(self, val):
-        self.data = [val] + self.data
-        return True
-
+        self.stack.append(val)
+        self.length += 1
+        if not self.max_stack:
+            self.max_stack.append(len(self.stack) - 1)
+        else:
+            try:
+                if val > self.stack[self.max_stack[-1]]:
+                    self.max_stack.append(len(self.stack) - 1)
+            except:
+                pass
         
     def pop(self):
-        if self.data:
-            p = self.data[0]
-            self.data = self.data[1:]
-            return p
-        else:
+        if not self.stack:
             return None
-        
-    def max_val(self):
-        if self.data:
-            return max(self.data)
-        else:
+        if len(self.stack) - 1 == self.max_stack[-1]:
+            self.max_stack.pop()
+            self.length -= 1
+
+        return self.stack.pop()
+
+    def max(self):
+        if not self.stack:
             return None
+        return self.stack[self.max_stack[-1]]
+    
+if __name__ == "__main__":   
+    s = Stack()
+    s.push(1)
+    s.push(3)
+    s.push(2)
+    s.push(5)
+    assert s.max() == 5
+    s.pop()
+    assert s.max() == 3
+    s.pop()
+    assert s.max() == 3
+    s.pop()
+    assert s.max() == 1
+    s.pop()
+    assert not s.max()
