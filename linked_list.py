@@ -61,3 +61,11 @@ class LinkedList:
      
        # 6. Change the next of last node 
        last.next =  new_node 
+       
+    def pop_head(self):
+        if self.head:
+            res = self.head.data
+            self.head = self.head.next
+            return res
+        else:
+            return None
