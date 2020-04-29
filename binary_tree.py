@@ -7,10 +7,10 @@ class Node:
 class Tree:
     
     def __init__(self, data = None):
-        self.root = data
+        self.root = Node(None)
     
     def insert_left(self, data):
-        if self.root is None:
+        if self.root.data is None:
             self.root = Node(data)
             return
         else:
@@ -20,7 +20,7 @@ class Tree:
         node.left = Node(data)
         
     def insert_right(self, data):
-        if self.root is None:
+        if self.root.data is None:
             self.root = Node(data)
             return
         else:
@@ -31,4 +31,6 @@ class Tree:
         
 if __name__ == "__main__":
     tree = Tree("*")
+    tree.insert_left("a")
+    tree.insert_right("b")
     
