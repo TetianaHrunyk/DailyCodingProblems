@@ -7,7 +7,7 @@ class DoubleNode:
         self.prev = None
         self.next = None
 
-class DoublyLinkedList:
+class DoublyLinkedList_rev:
     
     def __init__(self):
         self.head = None
