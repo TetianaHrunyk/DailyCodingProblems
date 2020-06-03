@@ -17,10 +17,7 @@ def lowest_common_ancestor(a, b):
     if a.parent and b.parent:
         lowest_common_ancestor(a.parent, b)
         lowest_common_ancestor(b.parent, a)
-    if a.parent == None:
-        return a
-    else:
-        return a.parent
+    return a if (a.parent == None or a == b) else a.parent
 
 if __name__ == "__main__":
     a = Node("a", None)
@@ -39,6 +36,7 @@ if __name__ == "__main__":
     assert lowest_common_ancestor(f, e) == e
     assert lowest_common_ancestor(a, a) == a
     assert lowest_common_ancestor(d, g) == c
+    assert lowest_common_ancestor(c, c) == c
         
             
     
