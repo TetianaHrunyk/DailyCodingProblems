@@ -24,6 +24,10 @@ def intersect(a_head, b_head):
     #This means that each value in the list is unique.
     #It follows that if there are two nodes with the same value
     #in A and B, that must be the intersection node.
+    
+    #Suppose a = Node(1)
+    #If b is the same obj as a, then a.val == b.val
+    # and a.next == b.next
 
     a_nodes = []
     while a_head:
