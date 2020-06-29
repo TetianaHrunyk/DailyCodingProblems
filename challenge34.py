@@ -40,37 +40,25 @@ def makePalindrom(s: str, pivot) -> tuple:
         left = s[:pivot]
         pivot_val = s[pivot]
         right = s[(pivot+1):]
-#        print("left %s, right %s" % (left, right))
     else:
         left = s[:math.ceil(pivot)]
         right = s[math.ceil(pivot):]
-        #print("left %s, right %s" % (left, right))
     i = 0
     while left != right[::-1]:
-        #print("While loop. left %s, right %s" % (left, right))
         if i >= len(right):
-#            print("add %s to right"%left[-i-1])
             right += left[-i-1]
         elif i >= len(left):
-#            print("add %s to left"%right[i])
             left = right[i] + left
         else:
             if left[-i-1] != right[i]:
-#                print("i=", i)
-#                print("left[-%d] = %s, right[%d] = %s" %(i, left[-i-1], i, right[i]))
                 better = min(left[-i-1], right[i])
-#                print("better: ", better)
                 if left[-i-1] == better:
-#                    print("add %s to right"%better)
+
                     right = right[:i] + better + right[i:]
                 else:
-#                    print("add %s to left"%better)
                     left = left[::-1]
                     left = left[:i] + better + left[i:]  
                     left = left[::-1]
-#            else:
-#                print("Equal, i=", i)
-#                print("left[-%d] = %s, right[%d] = %s" %(i, left[-i-1], i, right[i]))
         i += 1
         added_chars += 1
     
