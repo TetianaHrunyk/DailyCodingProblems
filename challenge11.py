@@ -14,25 +14,48 @@ class Node:
 
 class Autocomplete:
     
-    def __init__(self):
-        self.options = Node("")
+    def __init__(self, word_list):
+        self.list = word_list
+        self.words = dict()
+        for word in word_list: 
+            self.add_word(word)
         
-    def add_node(self, root, parent, node, k = 1):
-        if root.val in node.val and k<50:
-            print(f"parent {parent.val}, root {root.val}, k = {k}")
-            parent = root
-            k+=1
-            for child in root.children:
-                self.add_node(child, parent, node, k)
-            parent.children.append(node)
+    def __repr__(self):
+        return str(self.words)
         
-    def construct(self, options):
-        options.sort()
-        for option in options:
-            for i in range(len(option)):
-                new_node = Node(option[:i], [])
-                self.add_node(self.options, self.options, new_node)
+    def add_word(self, word):
         
+        def add_rec(level, word):
+            if not word:
+                return
+            if word[0] not in level.keys():
+                level[word[0]] = dict()
+            level = level[word[0]]
+            add_rec(level, word[1:])
+        
+        add_rec(self.words, word)
+                    
+    def autocomplete(self, prefix):
+        options = []
+        
+        def complete_rec(level, prefix):
+            if len(level.keys()) == 0:
+                options.append(prefix)
+            for key in level.keys():
+                prefix += key
+                complete_rec(level[key], prefix)
+                prefix = prefix[:-1]
+        
+        level = self.words
+        for letter in prefix:
+            level = level[letter]
+        complete_rec(level, prefix)       
+        
+        return options
+        
+       
 if __name__ == "__main__":
-    auto = Autocomplete()
-    auto.construct(["dog", "deer", "deal"])
+    auto = Autocomplete(["dog", "deer", "deal", 'cat', 'can', 'camp', 'cost'])
+    assert auto.autocomplete('de') == ['deer', 'deal']
+    assert auto.autocomplete('do') == ['dog']
+    assert auto.autocomplete('ca') == ['cat', 'can', 'camp']
